@@ -22,8 +22,11 @@ loop:
     addi t0 t0 4
     # Check if we are done
     # If not, loop
-    bge t2 t1 loop
+    # loop should proceed only if t1 < t2
+    bgt t2 t1 loop
 
+    # free emory, a0 contains the original pointer to the allocated block
+    jal free
     # Exit the program
     li a0 0
     jal exit
