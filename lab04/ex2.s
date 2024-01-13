@@ -32,7 +32,11 @@ ex2:
     # a1 contains the power to raise to
     # the return value should be the result of a0^a1
     #     where ^ is the exponent operator, not XOR
+    # BEGIN PROLOGUE
+    addi sp, sp, -8
     sw s0 0(sp)
+    sw ra 4(sp)
+    # END PROLOGUE
 
     # return 1 if a1 == 0
     beq a1 x0 ex2_zero_case
@@ -52,6 +56,10 @@ ex2_zero_case:
     li a0 1
 
 ex2_end:
+    # BEGIN EPILOGUE
     lw s0 0(sp)
+    lw ra 4(sp)
+    addi sp, sp, 8
+    # END EPILOGUE
 
     ret
